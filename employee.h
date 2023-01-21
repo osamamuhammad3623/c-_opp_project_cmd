@@ -3,6 +3,11 @@
 #include <vector>
 using namespace std;
 
+typedef enum{
+    Name=1, ID, Job
+}Employee_Search_Type;
+
+
 class Employee{
 public:
     string name{};
@@ -19,7 +24,10 @@ public:
     {};
 
     void static display_all(void);
+    void static display(vector<Employee> &emps);
     void static add(void);
     void static remove(int index);
-    
+    void static search_menu(void);
+
+    vector<Employee> static search(Employee_Search_Type search_by, string parameter);  
 };

@@ -1,3 +1,3 @@
 run:
-	@g++ *.h *.cpp -o output.exe -std=c++17
-	@./output.exe
+	@g++ *.h *.cpp -o output -std=c++17
+	@./output
