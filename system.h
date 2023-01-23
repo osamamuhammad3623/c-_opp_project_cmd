@@ -1,17 +1,19 @@
 #include <iostream>
 using namespace std;
 
+namespace System{
 
-void display_menu(void);
+    void display_menu(void);
 
-void wait_for_user(void);
+    void wait_for_user(void);
 
-void change_password(void);
+    void change_password(void);
 
-bool user_login(void);
+    bool user_login(void);
 
-string load_password(void);
+    string load_password(void);
 
-void store_password(string pass);
+    void store_password(string pass);
 
-int take_user_choice(void);
+    int take_user_choice(void);
+}

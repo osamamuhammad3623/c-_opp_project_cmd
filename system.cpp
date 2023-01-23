@@ -1,7 +1,7 @@
 #include "system.h"
 #include <fstream>
 
-void display_menu(void){
+void System::display_menu(void){
     system("clear");
     cout << "1. View all vehicles\n";
     cout << "2. Add a vehicle\n";
@@ -19,7 +19,7 @@ void display_menu(void){
     cout << "12. Exit\n";
 }
 
-void change_password(void){
+void System::change_password(void){
     system("clear");
     cout << "Enter the new password: ";
     
@@ -28,25 +28,25 @@ void change_password(void){
     store_password(new_pass);
 }
 
-void wait_for_user(void){
+void System::wait_for_user(void){
     cout << "Press (b) to go back\n";
     char b;
     while((cin >> b) && (b!= 'b'));
 }
 
-string load_password(void){
+string System::load_password(void){
     fstream file;
     file.open("user_pass");
     
     string pass{};
     if(file.is_open()){
-        file >> pass;
+        getline(file, pass);
     }
 
     return pass;
 }
 
-void store_password(string pass){
+void System::store_password(string pass){
     fstream file;
     file.open("user_pass");
     
@@ -55,7 +55,7 @@ void store_password(string pass){
     }
 }
 
-bool user_login(void){
+bool System::user_login(void){
     system("clear");
     cout << "Enter password: ";
     string user_input;
@@ -67,7 +67,7 @@ bool user_login(void){
     return false;
 }
 
-int take_user_choice(void){
+int System::take_user_choice(void){
     cout << "Enter your choice number: ";
     int choice;
     cin >> choice;
