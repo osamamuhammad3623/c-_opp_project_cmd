@@ -10,7 +10,10 @@ system-test:
 	@g++ main.cpp system_test.cpp ../system.cpp -o output -std=c++17 -lgtest -lgtest_main
 	@./output
 
+
+test_sourcefiles = *.cpp ../employee.* ../vehicle.* ../system.*
+
 all:
-	@$(MAKE) employee-test
-	@$(MAKE) vehicle-test
+	@g++ $(test_sourcefiles) -o output -std=c++17 -lgtest -lgtest_main
+	@./output
 	
