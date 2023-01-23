@@ -14,20 +14,15 @@ public:
     string id{};
     string job{};
     int salary{};
-    static vector<Employee> employees;
+    static vector<Employee> all_employees;
 
-    Employee(string _name, string _id, string _job, int _salary):
-        name{_name},
-        id{_id},
-        job{_job},
-        salary{_salary}
-    {};
+    Employee(string _name, string _id, string _job, int _salary);
 
     void static display_all(void);
-    void static display(vector<Employee> &emps);
-    void static add(void);
-    void static remove(int index);
+    void static add(Employee &emp);
     void static search_menu(void);
-
     vector<Employee> static search(Employee_Search_Type search_by, string parameter);  
+    
+    void display(void);
+    void remove(void);
 };

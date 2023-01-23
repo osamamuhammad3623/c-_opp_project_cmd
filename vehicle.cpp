@@ -1,11 +1,19 @@
 #include "vehicle.h"
 #include <regex>
 
-vector <Vehicle> Vehicle::cars{};
+vector <Vehicle> Vehicle::all_vehicles{};
+
+Vehicle::Vehicle(string _oem, string _model, int _cost, int _release_year, int _stock):
+    oem{_oem},
+    model{_model},
+    cost{_cost},
+    release_year{_release_year},
+    stock{_stock}
+{};
 
 void Vehicle::display_all(void){
     short counter=1;
-    for(Vehicle &car: cars){
+    for(Vehicle &car: all_vehicles){
         cout << "Vehicle " << counter++ << " :-\n";
         cout << "OEM: " << car.oem << endl;
         cout << "Model: " << car.model << endl;
@@ -16,56 +24,36 @@ void Vehicle::display_all(void){
     }
 }
 
-void Vehicle::display(vector<Vehicle> &vehicles){
-    short counter=1;
-    for(Vehicle &v: vehicles){
-        cout << "Vehicle " << counter++ << " :-\n";
-        cout << "OEM: " << v.oem << endl;
-        cout << "Model: " << v.model << endl;
-        cout << "Cost: " << v.cost << endl;
-        cout << "Release year: " << v.release_year << endl;
-        cout << "Stock: " << v.stock << endl;
-        cout << endl;
-    }
+void Vehicle::display(void){
+    cout << "Vehicle:\n";
+    cout << "OEM: " << oem << endl;
+    cout << "Model: " << model << endl;
+    cout << "Cost: " << cost << endl;
+    cout << "Release year: " << release_year << endl;
+    cout << "Stock: " << stock << endl;
+    cout << endl;
 }
 
-void Vehicle::add(void){
-    string oem,model;
-    int stock{};
-    int release_year{};
-    int cost{};
+void Vehicle::add(Vehicle &vehicle){
     
-    cout << "OEM: ";
-    cin >> oem;
-
-    cout << "Model: ";
-    cin >> model;
-
-    cout << "Cost: ";
-    cin >> cost;
-
-    cout << "Release year: ";
-    cin >> release_year;
-
-    cout << "Stock: ";
-    cin >> stock;
-
-    Vehicle new_car(oem,model,cost,release_year,stock);
-    cars.push_back(new_car);
-
+    all_vehicles.push_back(vehicle);
 }
 
-void Vehicle::sell(int index){
-    index--; // to make it zero-based index
+void Vehicle::sell(void){
 
-    if(cars[index].stock > 1){
-        cars[index].stock--;
-    
-    }else if (cars[index].stock == 1){
-        // remove the car from the vector
-        swap(cars[index], cars.back());
-        cars.pop_back();
+    if (this->stock == 1){
+        // remove vehicle from the vector
+        for(Vehicle &v: all_vehicles){
+            if((v.oem==oem) || (v.model==model) || (v.cost==cost)|| (v.stock==stock) || (v.release_year==release_year)){
+                swap(v, all_vehicles.back());
+                all_vehicles.pop_back();
+                break;
+            }
+        }
     }
+    else{
+        this->stock--;
+    } 
 }
 
 void Vehicle::search_menu(void){
@@ -82,7 +70,7 @@ vector<Vehicle> Vehicle::search_str(Vehicle_Search_Type search_by, string parame
     vector<Vehicle> result{};
     regex expr("(.*)"+parameter+"(.*)");
     
-    for(Vehicle &c: cars){
+    for(Vehicle &c: all_vehicles){
         switch (search_by)
         {
         case OEM:
@@ -103,7 +91,7 @@ vector<Vehicle> Vehicle::search_str(Vehicle_Search_Type search_by, string parame
 vector<Vehicle> Vehicle::search_range(Vehicle_Search_Type search_by, int min_range, int max_range){
     vector<Vehicle> result{};
 
-    for(Vehicle &c: cars){
+    for(Vehicle &c: all_vehicles){
         switch (search_by)
         {
         case Cost:

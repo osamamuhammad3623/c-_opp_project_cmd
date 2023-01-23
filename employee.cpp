@@ -1,11 +1,18 @@
 #include "employee.h"
 #include <regex>
 
-vector<Employee> Employee::employees{};
+vector<Employee> Employee::all_employees{};
+
+Employee::Employee(string _name, string _id, string _job, int _salary):
+    name{_name},
+    id{_id},
+    job{_job},
+    salary{_salary}
+{};
 
 void Employee::display_all(void){
     short counter=1;
-    for(Employee &employee: employees){
+    for(Employee &employee: all_employees){
         cout << "Employee " << counter++ << ":-\n";
         cout << "Name: " << employee.name << endl;
         cout << "ID: " << employee.id << endl;
@@ -15,43 +22,28 @@ void Employee::display_all(void){
     }
 }
 
-void  Employee::display(vector<Employee> &emps){
-    short counter=1;
-    for(Employee &employee: emps){
-        cout << "Employee " << counter++ << ":-\n";
-        cout << "Name: " << employee.name << endl;
-        cout << "ID: " << employee.id << endl;
-        cout << "Job: " << employee.job << endl;
-        cout << "Salary: " << employee.salary << endl;
-        cout << endl;
+void Employee::display(void){
+    cout << "Employee:\n";
+    cout << "Name: " << name << endl;
+    cout << "ID: " << id << endl;
+    cout << "Job: " << job << endl;
+    cout << "Salary: " << salary << endl;
+    cout << endl;
+}
+
+void Employee::add(Employee &emp){
+
+    all_employees.push_back(emp);
+}
+
+void Employee::remove(void){
+
+    for(Employee &emp: all_employees){
+        if (emp.id == this->id){
+            swap(emp, all_employees.back());
+            all_employees.pop_back();
+        }
     }
-}
-
-void Employee::add(void){
-    string name,id,job;
-    int salary{};
-
-    cout << "Name: ";
-    cin >> name;
-
-    cout << "ID: ";
-    cin >> id;
-
-    cout << "Job: ";
-    cin >> job;
-
-    cout << "Salary: ";
-    cin >> salary;
-
-    Employee new_epmloyee(name,id,job,salary);
-    employees.push_back(new_epmloyee);
-
-}
-
-void Employee::remove(int index){
-    index--; // to make it zero-based index
-    swap(employees[index], employees.back());
-    employees.pop_back();
 }
 
 void Employee::search_menu(void){
@@ -66,7 +58,7 @@ vector<Employee> Employee::search(Employee_Search_Type search_by, string paramet
 
     regex expr("(.*)"+parameter+"(.*)");
 
-    for(Employee &emp: employees){
+    for(Employee &emp: all_employees){
         switch (search_by)
         {
         case Name:

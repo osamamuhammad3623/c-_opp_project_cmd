@@ -16,7 +16,7 @@ int main(){
         switch(user_choice){
             case 1:{
                 system("clear");
-                if(Vehicle::cars.empty()){
+                if(Vehicle::all_vehicles.empty()){
                     cout << "No cars to show\n";
                 }
                 else{
@@ -29,7 +29,28 @@ int main(){
 
             case 2:{
                 system("clear");
-                Vehicle::add();
+
+                string oem,model;
+                int stock{},release_year{}, cost{};
+                
+                cout << "OEM: ";
+                cin >> oem;
+
+                cout << "Model: ";
+                cin >> model;
+
+                cout << "Cost: ";
+                cin >> cost;
+
+                cout << "Release year: ";
+                cin >> release_year;
+
+                cout << "Stock: ";
+                cin >> stock;
+
+                Vehicle new_vehicle(oem,model,cost,release_year,stock);
+                Vehicle::add(new_vehicle);
+
                 system("clear");
                 cout << "A new car is added successfully!\n";
 
@@ -39,18 +60,18 @@ int main(){
 
             case 3:{
                 system("clear");
-                if(Vehicle::cars.empty()){
+                if(Vehicle::all_vehicles.empty()){
                     cout << "No cars to sell!\n";
                 }else{
                     Vehicle::display_all();
                     
                     short index{};
-                    while (index <=0 || index>Vehicle::cars.size()){
+                    while (index <=0 || index>Vehicle::all_vehicles.size()){
                         cout << "Enter car number: ";
                         cin >> index;
                     }
 
-                    Vehicle::sell(index);
+                    Vehicle::all_vehicles[--index].sell();
                     system("clear");
                     cout << "The car is sold successfully!\n";
                 }
@@ -60,7 +81,7 @@ int main(){
 
             case 4:{
                 system("clear");
-                if(Vehicle::cars.empty()){
+                if(Vehicle::all_vehicles.empty()){
                     cout << "No cars to modify!\n";
                 
                 }else{
@@ -69,11 +90,21 @@ int main(){
                     int index;
                     cin >> index;
 
-                    // make the stock =1 then sell it (to delete it from cars vector)
-                    Vehicle::cars[index-1].stock=1;
-                    Vehicle::sell(index);
+                    index--; // to be zero-based                   
+                    cout << "New OEM: ";
+                    cin >> Vehicle::all_vehicles[index].oem;
 
-                    Vehicle::add();
+                    cout << "New Model: ";
+                    cin >> Vehicle::all_vehicles[index].model;
+
+                    cout << "New Cost: ";
+                    cin >> Vehicle::all_vehicles[index].cost;
+
+                    cout << "New Release year: ";
+                    cin >> Vehicle::all_vehicles[index].release_year;
+
+                    cout << "New Stock: ";
+                    cin >> Vehicle::all_vehicles[index].stock;
 
                     system("clear");
                     cout << "The car is modified successfully\n";
@@ -84,7 +115,7 @@ int main(){
 
             case 5:{
                 system("clear");
-                if(Vehicle::cars.empty()){
+                if(Vehicle::all_vehicles.empty()){
                     cout << "No cars to search!\n";
                 
                 }else{
@@ -117,7 +148,9 @@ int main(){
                             break;
                     }
 
-                    Vehicle::display(result);
+                    for(Vehicle &v: result){
+                        v.display();
+                    }
                 }
                 wait_for_user();
                 break;
@@ -125,7 +158,7 @@ int main(){
 
             case 6:{
                 system("clear");
-                if(Employee::employees.empty()){
+                if(Employee::all_employees.empty()){
                     cout << "No employees to show\n";
                 }
                 else{
@@ -138,7 +171,25 @@ int main(){
 
             case 7:{
                 system("clear");
-                Employee::add();
+
+                string name,id,job;
+                int salary{};
+
+                cout << "Name: ";
+                cin >> name;
+
+                cout << "ID: ";
+                cin >> id;
+
+                cout << "Job: ";
+                cin >> job;
+
+                cout << "Salary: ";
+                cin >> salary;
+
+                Employee new_epmloyee(name,id,job,salary);
+                Employee::add(new_epmloyee);
+
                 system("clear");
                 cout << "A new employee is added successfully!\n";
 
@@ -148,18 +199,18 @@ int main(){
 
             case 8:{
                 system("clear");
-                if(Employee::employees.empty()){
+                if(Employee::all_employees.empty()){
                     cout << "No employees to remove!\n";
                 }else{        
                     Employee::display_all();
                     
                     short index{};
-                    while (index <=0 || index>Employee::employees.size()){
+                    while (index <=0 || index>Employee::all_employees.size()){
                         cout << "Enter employee number: ";
                         cin >> index;
                     }
 
-                    Employee::remove(index);
+                    Employee::all_employees[--index].remove();
                     system("clear");
                     cout << "The employee is removed successfully!\n";
                 }
@@ -170,7 +221,7 @@ int main(){
 
             case 9:{
                 system("clear");
-                if(Employee::employees.empty()){
+                if(Employee::all_employees.empty()){
                     cout << "No employees to modify!\n";
                 
                 }else{
@@ -178,10 +229,19 @@ int main(){
                     cout << "Enter employee number: ";
                     int index;
                     cin >> index;
+                    index--;
 
-                    Employee::remove(index);
+                    cout << "New Name: ";
+                    cin >> Employee::all_employees[index].name;
 
-                    Employee::add();
+                    cout << "New ID: ";
+                    cin >> Employee::all_employees[index].id;
+
+                    cout << "New Job: ";
+                    cin >> Employee::all_employees[index].job;
+
+                    cout << "New Salary: ";
+                    cin >> Employee::all_employees[index].salary;
 
                     system("clear");
                     cout << "The car is modified successfully\n";
@@ -193,7 +253,7 @@ int main(){
 
             case 10:{
                 system("clear");
-                if(Employee::employees.empty()){
+                if(Employee::all_employees.empty()){
                     cout << "No employees to search!\n";
                 
                 }else{
@@ -209,13 +269,14 @@ int main(){
                     cout << "Search result:\n";
 
                     vector<Employee> result = Employee::search((Employee_Search_Type)search_type, parameter);
-                    Employee::display(result);
+                    for(Employee &emp: result){
+                        emp.display();
+                    }
                 }
 
                 wait_for_user();
                 break;
             }
-
 
             case 11:{
                 change_password();
