@@ -128,8 +128,6 @@ int main(){
                     string parameter;
                     cin >> parameter;
                     
-                    cout << "Search result:\n";
-
                     int temp_min{},temp_max{};
                     vector<Vehicle> result;
                     switch(search_type){
@@ -148,9 +146,8 @@ int main(){
                             break;
                     }
 
-                    for(Vehicle &v: result){
-                        v.display();
-                    }
+                    System::display_search_result<Vehicle>(result);
+
                 }
                 System::wait_for_user();
                 break;
@@ -266,12 +263,9 @@ int main(){
                     string parameter;
                     cin >> parameter;
                     
-                    cout << "Search result:\n";
-
                     vector<Employee> result = Employee::search((Employee_Search_Type)search_type, parameter);
-                    for(Employee &emp: result){
-                        emp.display();
-                    }
+
+                    System::display_search_result<Employee>(result);
                 }
 
                 System::wait_for_user();
@@ -279,7 +273,12 @@ int main(){
             }
 
             case 11:{
-                System::change_password();
+                system("clear");
+                cout << "Enter the new password: ";
+                
+                string new_pass{};
+                cin >> new_pass;
+                System::store_password(new_pass);
                 break;
             }
 
