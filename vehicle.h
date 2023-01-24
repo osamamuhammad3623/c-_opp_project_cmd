@@ -3,6 +3,9 @@
 #include <vector>
 using namespace std;
 
+#ifndef VEHICLE_HEADER
+#define VEHICLE_HEADER
+
 typedef enum{
     OEM=1, Model, Cost, Release_Year
 }Vehicle_Search_Type;
@@ -28,3 +31,5 @@ public:
     void display(void);
     void sell(void);
 };
+
+#endif /*VEHICLE_HEADER*/
