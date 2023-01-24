@@ -7,12 +7,12 @@ using namespace std;
 
 int main(){
 
-    while(!user_login());
+    while(!System::user_login());
     while (1)
     {
-        display_menu();
+        System::display_menu();
         
-        short user_choice = take_user_choice();
+        short user_choice = System::take_user_choice();
         switch(user_choice){
             case 1:{
                 system("clear");
@@ -23,7 +23,7 @@ int main(){
                     Vehicle::display_all();
                 }
 
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -54,7 +54,7 @@ int main(){
                 system("clear");
                 cout << "A new car is added successfully!\n";
 
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -75,7 +75,7 @@ int main(){
                     system("clear");
                     cout << "The car is sold successfully!\n";
                 }
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -109,7 +109,7 @@ int main(){
                     system("clear");
                     cout << "The car is modified successfully\n";
                 }
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -152,7 +152,7 @@ int main(){
                         v.display();
                     }
                 }
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -165,7 +165,7 @@ int main(){
                     Employee::display_all();
                 }
 
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -193,7 +193,7 @@ int main(){
                 system("clear");
                 cout << "A new employee is added successfully!\n";
 
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
@@ -214,7 +214,7 @@ int main(){
                     system("clear");
                     cout << "The employee is removed successfully!\n";
                 }
-                wait_for_user();
+                System::wait_for_user();
 
                 break;
             }
@@ -246,7 +246,7 @@ int main(){
                     system("clear");
                     cout << "The car is modified successfully\n";
                 }
-                wait_for_user();
+                System::wait_for_user();
 
                 break;
             }
@@ -274,12 +274,12 @@ int main(){
                     }
                 }
 
-                wait_for_user();
+                System::wait_for_user();
                 break;
             }
 
             case 11:{
-                change_password();
+                System::change_password();
                 break;
             }
 
