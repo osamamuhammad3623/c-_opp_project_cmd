@@ -19,15 +19,6 @@ void System::display_menu(void){
     cout << "12. Exit\n";
 }
 
-void System::change_password(void){
-    system("clear");
-    cout << "Enter the new password: ";
-    
-    string new_pass{};
-    cin >> new_pass;
-    store_password(new_pass);
-}
-
 void System::wait_for_user(void){
     cout << "Press (b) to go back\n";
     char b;
@@ -58,7 +49,7 @@ bool System::user_login(void){
     system("clear");
     cout << "Enter password: ";
     string user_input;
-    cin >> user_input;
+    getline(cin, user_input);
 
     if (load_password() == user_input){
         return true; 
