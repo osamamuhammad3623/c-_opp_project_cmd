@@ -3,6 +3,9 @@
 #include <vector>
 using namespace std;
 
+#ifndef EMPLOYEE_HEADER
+#define EMPLOYEE_HEADER
+
 typedef enum{
     Name=1, ID, Job
 }Employee_Search_Type;
@@ -26,3 +29,5 @@ public:
     void display(void);
     void remove(void);
 };
+
+#endif /*EMPLOYEE_HEADER*/
