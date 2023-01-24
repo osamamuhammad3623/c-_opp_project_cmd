@@ -34,9 +34,9 @@ void System::wait_for_user(void){
     while((cin >> b) && (b!= 'b'));
 }
 
-string System::load_password(void){
+string System::load_password(string file_name /*="user_pass"*/){
     fstream file;
-    file.open("user_pass");
+    file.open(file_name);
     
     string pass{};
     if(file.is_open()){
@@ -46,10 +46,9 @@ string System::load_password(void){
     return pass;
 }
 
-void System::store_password(string pass){
+void System::store_password(string pass, string file_name /*="user_pass"*/){
     fstream file;
-    file.open("user_pass");
-    
+    file.open(file_name);
     if(file.is_open()){
         file << pass;
     }
