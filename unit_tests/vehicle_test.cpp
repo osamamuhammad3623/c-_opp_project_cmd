@@ -55,19 +55,19 @@ TEST(Vehicle_module, test_add_function){
 }
 
 TEST(Vehicle_module, test_remove_function_with_stock_1){
-	
-	g_vehicle.stock=1;
-	Vehicle::add(g_vehicle);
-	g_vehicle.sell();
+	Vehicle::all_vehicles.clear();
+	Vehicle temp_vehicle("temp1", "temp1", 100, 2010, 1);
+	Vehicle::add(temp_vehicle);
+	temp_vehicle.sell();
 
 	ASSERT_EQ(Vehicle::all_vehicles.size(), 0);
 }
 
 TEST(Vehicle_module, test_remove_function_with_stock_more_than_1){
-	
-	g_vehicle.stock=5;
-	Vehicle::add(g_vehicle);
-	g_vehicle.sell();
+	Vehicle::all_vehicles.clear();
+	Vehicle temp_vehicle("temp10", "temp10", 100, 2010, 2);
+	Vehicle::add(temp_vehicle);
+	temp_vehicle.sell();
 
 	ASSERT_EQ(Vehicle::all_vehicles.size(), 1);
 }
