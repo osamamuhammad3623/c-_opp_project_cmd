@@ -9,7 +9,11 @@ Vehicle::Vehicle(string _oem, string _model, int _cost, int _release_year, int _
     cost{_cost},
     release_year{_release_year},
     stock{_stock}
-{};
+{
+    if(cost<0){cost =0;}
+    if(release_year<2000){release_year =2000;}
+    if(stock<0){stock =0;}
+};
 
 void Vehicle::display_all(void){
     short counter=1;
@@ -89,6 +93,9 @@ vector<Vehicle> Vehicle::search_str(Vehicle_Search_Type search_by, string parame
 }
 
 vector<Vehicle> Vehicle::search_range(Vehicle_Search_Type search_by, int min_range, int max_range){
+    if((min_range<0) || (max_range<0) || (min_range>=max_range)){
+        return vector<Vehicle>();
+    }
     vector<Vehicle> result{};
 
     for(Vehicle &c: all_vehicles){
