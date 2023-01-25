@@ -47,6 +47,13 @@ TEST_F(Vehicle_fixture, test_stock_initialization){
     ASSERT_EQ(g_vehicle.stock,vehicle_ptr->stock);
 }
 
+TEST(Vehicle_Module, test_negative_init_values){
+	Vehicle v("oem", "model", -5, -10, -1);
+	EXPECT_EQ(v.cost, 0);
+	EXPECT_EQ(v.release_year, 2000);
+	ASSERT_EQ(v.stock, 0);
+}
+
 TEST(Vehicle_module, test_add_function){
 	
 	Vehicle::add(g_vehicle);
