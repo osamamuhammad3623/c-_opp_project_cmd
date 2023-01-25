@@ -8,7 +8,9 @@ Employee::Employee(string _name, string _id, string _job, int _salary):
     id{_id},
     job{_job},
     salary{_salary}
-{};
+{
+    if(salary<0){salary=0;}
+};
 
 void Employee::display_all(void){
     short counter=1;
